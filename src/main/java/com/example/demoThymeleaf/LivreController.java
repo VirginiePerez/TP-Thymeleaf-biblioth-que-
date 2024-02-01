@@ -3,6 +3,7 @@ package com.example.demoThymeleaf;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -46,6 +47,18 @@ public class LivreController {
         }
         return null; // Livre non trouvé
     }
+
+    @GetMapping("/ajoutLivre")
+    public String getForm(){
+        return "ajoutLivre.html";
+    }
+
+    @PostMapping("livres")
+    public String formulaire(Livre livre){
+        return "livres";
+    }
 }
+
+
 
 
