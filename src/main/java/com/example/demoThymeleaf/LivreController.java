@@ -1,52 +1,35 @@
 package com.example.demoThymeleaf;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LivreController {
 
-    private List<Livre> listeLivres = new ArrayList<>();
+    private final LivreService livreService;
 
-    // Initialisation de la liste des livres
-    {
-        listeLivres.add(new Livre("Introduction à l'Informatique", "Résumé1", "Editeur1", "2022-01-01"));
-        listeLivres.add(new Livre("Les Mystères du Cosmos", "Résumé2", "Editeur2", "2022-02-01"));
-        listeLivres.add(new Livre("L'Art de la Guerre", "Résumé3", "Editeur3", "2022-03-01"));
-        listeLivres.add(new Livre("Voyage au Centre de la Terre", "Résumé4", "Editeur4", "2022-04-01"));
-        listeLivres.add(new Livre("Le Portrait de Dorian Gray", "Résumé5", "Editeur5", "2022-05-01"));
+    @Autowired
+    public LivreController(LivreService livreService) {
+        this.livreService = livreService;
     }
 
     @GetMapping("/livres")
     public String livres(Model model) {
-        model.addAttribute("listeLivres", listeLivres);
+        model.addAttribute("listeLivres", livreService.getListeLivres());
         return "livres";
     }
 
     @GetMapping("/details")
     public String details(@RequestParam("id") Integer id, Model model) {
-        Livre livre = trouverLivreParId(id);
+        Livre livre = livreService.trouverLivreParId(id);
         if (livre != null) {
             model.addAttribute("livre", livre);
             return "details";
         } else {
             return "livres";
         }
-    }
-
-    private Livre trouverLivreParId(Integer id) {
-        for (Livre livre : listeLivres) {
-            if (livre.getId().equals(id)) {
-                return livre;
-            }
-        }
-        return null; // Livre non trouvé
     }
 
     @GetMapping("/ajoutLivre")
@@ -56,11 +39,11 @@ public class LivreController {
 
     @PostMapping("/livres")
     public String formulaire(Livre livre, Model model) {
-        // Ajoutez le livre à la liste
-        listeLivres.add(livre);
+        // Ajoutez le livre à la liste via le service
+        livreService.ajouterLivre(livre);
 
-        // Mise à jour de la liste des livres
-        model.addAttribute("listeLivres", listeLivres);
+        // Mise à jour de la liste des livres via le service
+        model.addAttribute("listeLivres", livreService.getListeLivres());
 
         // Ajout du nom du livre au modèle
         model.addAttribute("nomLivreAjoute", livre.getTitre());
