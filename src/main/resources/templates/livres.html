@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Livres</title>
+</head>
+<body>
+
+<h1>Liste des Livres</h1>
+
+<ul>
+    <li th:each="livre : ${listeLivres}">
+
+            <span th:text="${livre.titre}"></span>
+        </a>
+    </li>
+</ul>
+
+<a th:href="@{/}" >Retour à la liste des livres</a>
+
+</body>
+</html>

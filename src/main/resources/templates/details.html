@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du Livre</title>
+</head>
+<body>
+
+<h1>Détails du Livre</h1>
+
+<div th:if="${livre != null}">
+    <p><strong>Titre:</strong> <span th:text="${livre.titre}"></span></p>
+    <p><strong>Date de Parution:</strong> <span th:text="${livre.dateParution}"></span></p>
+    <p><strong>Résumé:</strong> <span th:text="${livre.resume}"></span></p>
+    <!-- Ajoutez d'autres détails du livre ici -->
+</div>
+
+<a th:href="@{/livres}">Retour à la liste des livres</a>
+
+</body>
+</html>

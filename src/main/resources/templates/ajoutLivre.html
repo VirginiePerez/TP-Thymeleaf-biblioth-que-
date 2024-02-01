@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Livre</title>
+</head>
+<body>
+
+<h1>Ajouter un Livre</h1>
+
+<form method="post" action="livres">
+
+    <form method="POST" action="livres">
+        <label>Titre:</label><input type="text" name="titre">
+        <label>Résumé:</label><input type="text" name="resume">
+        <label>Date de parution :</label><input type="date" name="dateParution">
+        <label>Editeur:</label><input type="text" name="editeur">
+        <label>ISBN:</label><input type="text" name="isbn">
+        <input type="submit" value="Envoyer">
+    </form>
+
+
+    <button type="submit">Ajouter Livre</button>
+</form>
+
+<a th:href="@{/livres}">Retour à la liste des livres</a>
+
+</body>
+</html>
