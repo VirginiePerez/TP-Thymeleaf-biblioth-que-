@@ -9,14 +9,17 @@
 
 <h1>Liste des Livres</h1>
 
+<div th:if="${nomLivreAjoute}">
+    <p th:text="'Vous avez ajouté : ' + ${nomLivreAjoute}" style="color: blue;"></p>
+</div>
 <ul>
     <li th:each="livre : ${listeLivres}">
-
+        <a th:href="@{'/details?id=' + ${livre.id}}">
             <span th:text="${livre.titre}"></span>
         </a>
     </li>
 </ul>
 
-
+<a th:href="@{ajoutLivre}">Ajouter un livre à la liste</a>
 </body>
 </html>

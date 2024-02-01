@@ -1,17 +1,20 @@
 package com.example.demoThymeleaf;
 
 public class Livre {
+    private static int count = 1;
     private Integer id;
     private String titre;
     private String resume;
     private String editeur;
     private String dateParution;
 
+
     public Livre() {
+        this.id = count++;
     }
 
-    public Livre(Integer id, String titre, String resume, String editeur, String dateParution) {
-        this.id = id;
+    public Livre(String titre, String resume, String editeur, String dateParution) {
+        this(); // Appelle le constructeur par défaut pour initialiser l'ID
         this.titre = titre;
         this.resume = resume;
         this.editeur = editeur;
